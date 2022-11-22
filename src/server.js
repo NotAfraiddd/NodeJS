@@ -12,10 +12,22 @@ app.use(morgan('combined'))
 
 // template engine
 app.set('view engine','ejs')
-app.set('views',path.join(__dirname,'template'))
+app.set('views',path.join(__dirname,'resources/views'))
 
 app.get('/',(req,res) =>{
-    return res.render('Home')
+    res.render('home')
 })
+
+app.get('/news',(req,res) =>{
+    res.render('news')
+})
+
+app.get('/search', (req, res) => {
+    res.render('search');
+});
+
+app.post('/search', (req, res) => {
+    res.send('');
+});
 
 app.listen(port,() => console.log('100%'))
