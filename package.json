@@ -5,11 +5,13 @@
     "express-ejs-layouts": "^2.5.1",
     "express-handlebars": "^6.0.6",
     "handlebars": "^4.7.7",
+    "mongoose": "^6.7.3",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.20",
     "sass": "^1.56.1"
   },
   "scripts": {
+    "beautiful": "lint-staged",
     "start": "nodemon --inspect src/server.js",
     "watch": "node-sass --watch src/resources/scss/ --output src/public/css/"
   },
@@ -27,8 +29,19 @@
     "url": "https://github.com/NotAfraiddd/NodeJS/issues"
   },
   "homepage": "https://github.com/NotAfraiddd/NodeJS#readme",
+  "lint-staged": {
+    "src/**/*.{js,json,scss}": "prettier --single-quote --trailing-comma all --write"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "description": "",
   "devDependencies": {
-    "node-sass": "^8.0.0"
+    "husky": "^8.0.2",
+    "lint-staged": "^13.0.3",
+    "node-sass": "^8.0.0",
+    "prettier": "^2.8.0"
   }
 }
