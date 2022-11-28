@@ -6,6 +6,7 @@
     "express-handlebars": "^6.0.6",
     "handlebars": "^4.7.7",
     "mongoose": "^6.7.3",
+    "mongoose-slug-generator": "^1.0.4",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.20",
     "sass": "^1.56.1"

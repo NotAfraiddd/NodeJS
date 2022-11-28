@@ -4,7 +4,7 @@ const siteRouter = require("./site");
 
 function route(app) {
     app.use("/news", newsRouter);
-    app.use("/khoa-hoc", courseRouter);
+    app.use("/courses", courseRouter);
     app.use("/", siteRouter);
 }
 
