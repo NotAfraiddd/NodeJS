@@ -11,22 +11,40 @@ class CourseController {
             .catch(next);
     }
 
-    // [GET]: gửi yêu cầu lấy dữ liệu -->/khoa-hoc/tao
-    create(req,res, next){
+    // [GET]: gửi yêu cầu lấy dữ liệu -->/courses/create
+    create(req, res, next) {
         res.render('courses/create')
     }
 
-    // [POST]gửi yêu cầu thêm dữ liệu -->/khoa-hoc/tao
-    store(req,res, next){
+    // [POST]gửi yêu cầu thêm dữ liệu -->/courses/create
+    store(req, res, next) {
         const formData = req.body
         formData.image = `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`
         const course = new Course(req.body)
         course.save()
-        .then(() => res.redirect(`/`))
-        .catch(error =>{
-            
-        })
+            .then(() => res.redirect(`/`))
+            .catch(error => {
+
+            })
     }
+
+    // [GET]: gửi yêu cầu lấy dữ liệu -->/courses/:id/edit
+    edit(req, res, next) {
+        Course.findById(req.params.id)
+            .then(course => res.render('courses/edit', {
+                course: mongooseToObject(course)
+            }))
+            .catch(next)
+
+    }
+
+    // [PUT] -->/courses/:id
+    update(req, res, next) {
+        Course.updateOne({ _id: req.params.id }, req.body)
+            .then(() => res.redirect('/me/stored/courses'))
+            .catch(next)
+    }
+
 }
 
 module.exports = new CourseController();
