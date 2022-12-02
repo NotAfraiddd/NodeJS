@@ -6,9 +6,9 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Tên khóa học</th>
+                <th scope="col" colspan="1">Tên khóa học</th>
                 <th scope="col">Trình độ</th>
-                <th scope="col" colspan="1">Thời gian tạo</th>
+                <th scope="col" colspan="1">Thời gian xóa</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
 
@@ -20,7 +20,7 @@
                 <th scope="row">{{sum @index 1}}</th>
                 <td>{{this.name}}</td>
                 <td>{{this.level}}</td>
-                <td>{{this.createdAt}}</td>
+                <td>{{this.deletedAt}}</td>
                 <td>
                     <a href="" class="btn btn-link btn-restore" data-id="{{this._id}}">Khôi phục</a>
                 </td>

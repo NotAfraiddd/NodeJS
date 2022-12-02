@@ -17,7 +17,7 @@ class CourseController {
     }
 
     // [POST]gửi yêu cầu thêm dữ liệu -->/courses/create
-    store(req, res, next) { 
+    store(req, res, next) {
         req.body.image = `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`
         const course = new Course(req.body)
         course.save()
@@ -53,7 +53,7 @@ class CourseController {
 
     // [DELETE] -->/courses/:id/force
     forceDestroy(req, res, next) {
-        Course.deleteOOne({ _id: req.params.id })
+        Course.deleteOne({ _id: req.params.id })
             .then(() => res.redirect('back'))
             .catch(next)
     }
@@ -64,6 +64,21 @@ class CourseController {
             .then(() => res.redirect('back'))
             .catch(next)
     }
+
+    handleFormActions(req, res, next) {
+        switch (req.body.action) {
+            case 'delete':
+                // vì courseIds là mảng nên ta phải sử dụng { _id: { $in: req.body.courseIds } }
+                Course.delete({ _id: { $in: req.body.courseIds } })
+                    .then(() => res.redirect('back'))
+                    .catch(next)
+                break;
+
+            default:
+                res.json({ message: 'Hành động không hợp lệ' })
+        }
+    }
+
 }
 
 module.exports = new CourseController();
