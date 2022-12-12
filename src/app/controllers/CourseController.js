@@ -65,6 +65,7 @@ class CourseController {
             .catch(next)
     }
 
+    // [POST] -->/courses/handle-form-active
     handleFormActions(req, res, next) {
         switch (req.body.action) {
             case 'delete':
@@ -79,6 +80,22 @@ class CourseController {
         }
     }
 
+    handleFormActionsInGarage(req, res, next) {
+        switch (req.body.action) {
+            case 'restore':
+                Course.restore({ _id: { $in: req.body.courseIds } })
+                    .then(() => res.redirect('back'))
+                    .catch(next)
+                break;
+            case 'delete-forever':
+                Course.deleteOne({ _id: { $in: req.body.courseIds } })
+                    .then(() => res.redirect('back'))
+                    .catch(next)
+                break;
+            default:
+                res.json({ message: 'Hành động không hợp lệ' })
+        }
+    }
 }
 
 module.exports = new CourseController();

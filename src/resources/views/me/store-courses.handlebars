@@ -120,8 +120,8 @@
         })
 
         checkAllSubmitBtn.on('submit', function (e) {
-            var isSubmitTable = !$(this).hasClass('disabled')
-            if (isSubmitTable) {
+            var isSubmitable = !$(this).hasClass('disabled')
+            if (isSubmitable) {
                 e.preventDefault()
             }
         })

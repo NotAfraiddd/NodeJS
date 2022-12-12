@@ -16,10 +16,13 @@ class MeController {
     }
 
     trashCourses(req, res, next) {
-        Course.findDeleted({})
-            .then(courses => res.render('me/trash-courses', {
-                courses: mutipleMongooseToObject(courses)
-            }))
+        Promise.all([Course.findDeleted(), Course.countDocuments()])
+            .then(([courses, notDeleteCount]) =>
+                res.render('me/trash-courses', {
+                    courses: mutipleMongooseToObject(courses),
+                    notDeleteCount: notDeleteCount
+                })
+            )
             .catch(next)
     }
 }
